@@ -43,10 +43,7 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-       if(convertView==null)
-       {
-           convertView = inflater.inflate(R.layout.item_wifi_list, null);
-       }
+        convertView = inflater.inflate(R.layout.item_wifi_list, null);
 
         TextView textView = (TextView) convertView.findViewById(R.id.textView);
         TextView signal = (TextView) convertView.findViewById(R.id.signal_strenth);
@@ -67,15 +64,14 @@ public class MyAdapter extends BaseAdapter {
             tvLevel.setText("较差");
         } else if (Math.abs(scanResult.level) > 60) {
             tvLevel.setText("一般");
-        }else if (Math.abs(scanResult.level) > 50) {
+        } else if (Math.abs(scanResult.level) > 50) {
             tvLevel.setText("较好");
         } else {
             tvLevel.setText("强");
         }
-            return convertView;
+        return convertView;
 
     }
-
 
 
 }
