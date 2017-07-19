@@ -85,10 +85,12 @@ public class MainActivity extends AppCompatActivity {
         etWifiPsd2 = (EditText) this.findViewById(R.id.et_2_psd);
         mListView = (ListView) this.findViewById(R.id.wifi_list_view);
         // 模拟手动输入
+        //A
         etWifiSSid1.setText("NJ_REDBEE_02");
+        etWifiPsd1.setText("zh58787661");
+        // B
         etWifiSSid2.setText("i6");
-        etWifiPsd1.setText("5201314.");
-        etWifiPsd2.setText("zh58787661");
+        etWifiPsd2.setText("123456789");
         // 初始化附近wifi列表
         mAdapter = new MyAdapter(this,mWifiList);
         mListView.setAdapter(mAdapter);
@@ -143,18 +145,20 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 // 添加配置网络
-                WifiConfiguration configuration1 = wifiAdmin.createWifiInfo(
-                        etWifiSSid1.getText().toString().trim(),etWifiPsd1.getText().toString().trim(),
-                        WifiAdmin.WifiCipherType.WIFICIPHER_WPA);
-                WifiConfiguration configuration2= wifiAdmin.createWifiInfo(
-                        etWifiSSid2.getText().toString().trim(),etWifiPsd2.getText().toString().trim(),
-                        WifiAdmin.WifiCipherType.WIFICIPHER_WPA);
-                boolean c2 =  wifiAdmin.addNetwork(configuration2);
-                boolean c1=   wifiAdmin.addNetwork(configuration1);
-                Log.d(TAG,"-----------------------");
-                Log.d(TAG,"wifi1 连接状态 = " + c1);
-                Log.d(TAG,"wifi2 连接状态 = " + c2);
-                Log.d(TAG,"-----------------------");
+                if(wifiAdmin!=null) {
+                    WifiConfiguration configuration1 = wifiAdmin.createWifiInfo(
+                            etWifiSSid1.getText().toString().trim(), etWifiPsd1.getText().toString().trim(),
+                            WifiAdmin.WifiCipherType.WIFICIPHER_WPA);
+                    WifiConfiguration configuration2 = wifiAdmin.createWifiInfo(
+                            etWifiSSid2.getText().toString().trim(), etWifiPsd2.getText().toString().trim(),
+                            WifiAdmin.WifiCipherType.WIFICIPHER_WPA);
+                    boolean c2 = wifiAdmin.addNetwork(configuration2);
+                    boolean c1 = wifiAdmin.addNetwork(configuration1);
+                    Log.d(TAG, "-----------------------");
+                    Log.d(TAG, "wifi1 连接状态 = " + c1);
+                    Log.d(TAG, "wifi2 连接状态 = " + c2);
+                    Log.d(TAG, "-----------------------");
+                }
                 break;
             case R.id.hide:
                 // 隐藏界面
