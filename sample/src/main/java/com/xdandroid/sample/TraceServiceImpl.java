@@ -63,7 +63,7 @@ public class TraceServiceImpl extends AbsWorkService {
     public void startWork(Intent intent, int flags, int startId) {
        Log.d(TAG,"service startWork");
         sDisposable = Flowable
-                .interval(3, TimeUnit.SECONDS)
+                .interval(LOOP_TIME, TimeUnit.SECONDS)
                 //取消任务时取消定时唤醒
                 .doOnTerminate(new Action() {
                     @Override

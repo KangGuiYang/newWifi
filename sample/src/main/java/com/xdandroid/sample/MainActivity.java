@@ -62,9 +62,20 @@ public class MainActivity extends AppCompatActivity {
                             ,Manifest.permission.ACCESS_WIFI_STATE)
                     .request();
         }else{
-//            afterRequestPermission();
+            afterRequestPermission();
         }
 
+    }
+
+    private void afterRequestPermission(){
+        wifiAdmin = new WifiAdmin(this);
+        if(!wifiAdmin.checkWifi()){
+            Log.d(TAG,"MainActivity wifi未开启,需要开启wifi");
+            // 开启wifi
+            wifiAdmin.openWifi();
+        }else{
+            Log.d(TAG,"MainActivity wifi已开启");
+        }
     }
 
     private void initViews() {
@@ -168,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     public void doPermissionSuccess() {
         Toast.makeText(this, "设备权限请求成功", Toast.LENGTH_SHORT).show();
         // 权限请求成功
+        afterRequestPermission();
     }
 
     /**
