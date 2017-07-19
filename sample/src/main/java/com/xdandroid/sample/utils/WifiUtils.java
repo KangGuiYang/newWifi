@@ -118,4 +118,14 @@ public class WifiUtils {
         });
     }
 
+    public  String getWifiName(Context context) {
+        String sWifiName;
+        if ("<unknown ssid>".equals(mWifiInfo.getSSID())) {
+            sWifiName = "";
+        } else {
+            sWifiName = mWifiInfo.getSSID();
+        }
+        return sWifiName;
+    }
+
 }

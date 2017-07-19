@@ -74,20 +74,27 @@ public class TraceServiceImpl extends AbsWorkService {
                 }).subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long count) throws Exception {
-                        // 判断是否开启wifi
-                        afterRequestPermission();
-                        Log.d(TAG,"扫描 wifi List");
-                        wifiAdmin.startScan();
-                        //附近范围的wifi列表 按强度由高到低显示
-                        List<ScanResult> wifiList = wifiAdmin.getWifiList();
-                        Log.d(TAG,"wifiList Size = " + wifiList.size());
-                        // 如果有MainActivity存在则刷新listView
-                        if(MainActivity.instance!=null)
-                            instance.upDateListView(wifiList);
-
+                            // 后台所做的事
+                            doService();
                     }
                 });
     }
+
+
+    private void doService(){
+        // 判断是否开启wifi
+        afterRequestPermission();
+        Log.d(TAG,"扫描 wifi List");
+        wifiAdmin.startScan();
+        //附近范围的wifi列表 按强度由高到低显示
+        List<ScanResult> wifiList = wifiAdmin.getWifiList();
+        Log.d(TAG,"wifiList Size = " + wifiList.size());
+        // 如果有MainActivity存在则刷新listView
+        if(MainActivity.instance!=null)
+            instance.upDateListView(wifiList);
+        // 观察当前已配置wifi网络
+    }
+
 
     @Override
     public void stopWork(Intent intent, int flags, int startId) {
