@@ -39,7 +39,7 @@ public class TraceServiceImpl extends AbsWorkService {
     }
 
     private void afterRequestPermission(){
-        wifiAdmin = new WifiAdmin(this);
+
         if(!wifiAdmin.checkWifi()){
             Log.d(TAG,"MainActivity wifi未开启,需要开启wifi");
             // 开启wifi
@@ -61,6 +61,7 @@ public class TraceServiceImpl extends AbsWorkService {
 
     @Override
     public void startWork(Intent intent, int flags, int startId) {
+        wifiAdmin = new WifiAdmin(this);
        Log.d(TAG,"service startWork");
         sDisposable = Flowable
                 .interval(LOOP_TIME, TimeUnit.SECONDS)
